@@ -1,0 +1,8 @@
+{
+	"editorconfig": true,
+	"semi": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"importOrderSeparation": false,
+	"importOrderSortSpecifiers": true
+}
