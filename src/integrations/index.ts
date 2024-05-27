@@ -1,3 +1,7 @@
+import { createDiscordIntegration } from './discord';
 import { createMastodonIntegration } from './mastodon';
 
-export const integrations = [createMastodonIntegration];
+export const integrations = [
+	createDiscordIntegration,
+	createMastodonIntegration,
+];

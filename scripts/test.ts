@@ -3,6 +3,7 @@ import { compact } from 'lodash';
 import { publish } from '../src';
 import { BaseUrl } from '../src/infrastructure/http.client';
 import { Integration } from '../src/integrations/common';
+import { createDiscordIntegration } from '../src/integrations/discord';
 import { createMastodonIntegration } from '../src/integrations/mastodon';
 
 const integrationListFormatter = new Intl.ListFormat('en', {
@@ -10,6 +11,13 @@ const integrationListFormatter = new Intl.ListFormat('en', {
 });
 
 const integrationMap: Map<string, Integration> = new Map([
+	[
+		'Discord',
+		createDiscordIntegration({
+			webhookId: process.env['DISCORD_WEBHOOK_ID']!,
+			webhookToken: process.env['DISCORD_WEBHOOK_TOKEN']!,
+		}),
+	],
 	[
 		'Mastodon',
 		createMastodonIntegration({
@@ -22,7 +30,7 @@ const integrationMap: Map<string, Integration> = new Map([
 const integrations = await checkbox({
 	message: 'Which integrations would you like to test?',
 	choices: Array.from(integrationMap.keys()).map((key) => ({
-		checked: true,
+		checked: false,
 		value: key,
 	})),
 });
