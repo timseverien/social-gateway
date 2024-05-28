@@ -14,6 +14,7 @@ export function createMastodonClient(
 	});
 }
 
+// See: https://docs.joinmastodon.org/methods/statuses/#create
 export async function publishStatus(
 	client: HttpClient,
 	data: {
