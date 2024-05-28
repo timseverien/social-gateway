@@ -5,21 +5,27 @@ export type PostRequestOptions = BaseRequestOptions & {
 };
 export type RequestOptions = GetRequestOptions | PostRequestOptions;
 
+export type AbsoluteUrlPath = `/${string}`;
+
 export type HttpClient = {
-	get(path: string, options?: GetRequestOptions): Promise<Response>;
-	post(path: string, options?: PostRequestOptions): Promise<Response>;
+	get(path: AbsoluteUrlPath, options?: GetRequestOptions): Promise<Response>;
+	post(path: AbsoluteUrlPath, options?: PostRequestOptions): Promise<Response>;
 };
 
-export type BaseUrl = `${'http' | 'https'}://${string}`;
-
-function mergeHeaders(a: Headers | undefined, b: Headers | undefined): Headers {
+export function mergeHeaders(
+	a: Headers | undefined,
+	b: Headers | undefined,
+): Headers {
 	return new Headers({
 		...(a ? Object.fromEntries(a.entries()) : null),
 		...(b ? Object.fromEntries(b.entries()) : null),
 	});
 }
 
-function mergeRequestOptions<T extends RequestOptions>(a: T, b: T): T {
+export function mergeRequestOptions<T extends RequestOptions>(
+	a: BaseRequestOptions,
+	b: T,
+): T {
 	const result = { ...a, ...b };
 
 	if (a.headers || b.headers) {
@@ -30,10 +36,10 @@ function mergeRequestOptions<T extends RequestOptions>(a: T, b: T): T {
 }
 
 export function createHttpClient(
-	baseUrl: BaseUrl,
+	baseUrl: URL,
 	baseOptions: BaseRequestOptions = {},
 ): HttpClient {
-	const request = (path: string, options: RequestInit) => {
+	const request = (path: AbsoluteUrlPath, options: RequestInit) => {
 		const url = new URL(path, baseUrl);
 		return fetch(url, options);
 	};

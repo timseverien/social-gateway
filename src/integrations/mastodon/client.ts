@@ -1,21 +1,17 @@
-import {
-	BaseUrl,
-	HttpClient,
-	createHttpClient,
-} from '../../infrastructure/http.client';
+import { HttpClient, createHttpClient } from '../../infrastructure/http.client';
 
 export function createMastodonClient(
-	mastodonUrl: BaseUrl,
+	instanceUrl: string,
 	clientOptions: { accessToken: string },
 ): HttpClient {
-	const httpClient = createHttpClient(mastodonUrl, {
+	const url = new URL(instanceUrl);
+
+	return createHttpClient(url, {
 		headers: new Headers({
 			Authorization: `Bearer ${clientOptions.accessToken}`,
 			'Content-Type': 'application/json',
 		}),
 	});
-
-	return httpClient;
 }
 
 export async function publishStatus(

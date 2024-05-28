@@ -1,7 +1,7 @@
 import { HttpClient, createHttpClient } from '../../infrastructure/http.client';
 
 export function createDiscordClient(): HttpClient {
-	const httpClient = createHttpClient('https://discord.com/', {
+	const httpClient = createHttpClient(new URL('https://discord.com'), {
 		headers: new Headers({
 			'Content-Type': 'application/json',
 		}),
@@ -10,7 +10,7 @@ export function createDiscordClient(): HttpClient {
 	return httpClient;
 }
 
-export async function executeWebhook(
+export async function sendMessage(
 	client: HttpClient,
 	options: {
 		webhookId: string;

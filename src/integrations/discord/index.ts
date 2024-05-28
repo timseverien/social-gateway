@@ -1,5 +1,6 @@
 import { Integration } from '../common';
-import { createDiscordClient, executeWebhook } from './client';
+import { createDiscordClient, sendMessage } from './client';
+import { validateMessage } from './service';
 
 type DiscordIntegrationOptions = {
 	webhookId: string;
@@ -12,18 +13,10 @@ export function createDiscordIntegration(
 	const client = createDiscordClient();
 
 	return {
-		async validate(message) {
-			if (message.content.length === 0) {
-				return 'CONTENT_TOO_SHORT';
-			}
-
-			return 'VALID';
-		},
-
-		async publish(message) {
-			await executeWebhook(client, webhookOptions, {
+		validate: validateMessage,
+		publish: (message) =>
+			sendMessage(client, webhookOptions, {
 				content: message.content,
-			});
-		},
+			}),
 	};
 }

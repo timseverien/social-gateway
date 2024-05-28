@@ -1,9 +1,9 @@
-import { BaseUrl } from '../../infrastructure/http.client';
 import { Integration } from '../common';
 import { createMastodonClient, publishStatus } from './client';
+import { validateMessage } from './service';
 
 type MastodonIntegrationOptions = {
-	instanceUrl: BaseUrl;
+	instanceUrl: string;
 	accessToken: string;
 };
 
@@ -15,18 +15,10 @@ export function createMastodonIntegration(
 	});
 
 	return {
-		async validate(message) {
-			if (message.content.length === 0) {
-				return 'CONTENT_TOO_SHORT';
-			}
-
-			return 'VALID';
-		},
-
-		async publish(message) {
-			await publishStatus(client, {
+		validate: validateMessage,
+		publish: (message) =>
+			publishStatus(client, {
 				status: message.content,
-			});
-		},
+			}),
 	};
 }
