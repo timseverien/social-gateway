@@ -60,6 +60,20 @@ describe(publish.name, () => {
 		);
 	});
 
+	test('given message with invalid language code, throws', () => {
+		const message: GatewayMessage = {
+			content: 'foobar',
+			language: 'fake',
+		};
+		const publishOptions: PublishOptions = {
+			integrations: [],
+		};
+
+		expect(() => publish(message, publishOptions)).rejects.toThrowError(
+			'MESSAGE_LANGUAGE_INVALID',
+		);
+	});
+
 	test('does not call publish of any integration when validation of one of the integration fails', async () => {
 		const message: GatewayMessage = {
 			content: 'foobar',

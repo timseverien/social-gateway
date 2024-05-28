@@ -17,8 +17,13 @@ export function createMastodonIntegration(
 	return {
 		validate: validateMessage,
 		publish: (message) =>
-			publishStatus(client, {
-				status: message.content,
-			}),
+			publishStatus(
+				client,
+				{},
+				{
+					status: message.content,
+					language: message.language,
+				},
+			),
 	};
 }

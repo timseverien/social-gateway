@@ -25,9 +25,13 @@ describe(publishStatus.name, () => {
 		const client = createMockHttpClient();
 		const message = 'Foobar';
 
-		await publishStatus(client, {
-			status: message,
-		});
+		await publishStatus(
+			client,
+			{},
+			{
+				status: message,
+			},
+		);
 
 		expect(client.post).toHaveBeenCalledWith(
 			'/api/v1/statuses',

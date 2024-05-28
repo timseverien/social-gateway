@@ -1,3 +1,4 @@
+import iso639 from 'iso-639-1';
 import { GatewayMessage } from './core/message';
 import { Integration } from './integrations/common';
 
@@ -7,6 +8,10 @@ export async function publish(
 	message: GatewayMessage,
 	options: PublishOptions,
 ) {
+	if (message.language && !iso639.validate(message.language)) {
+		throw new Error('MESSAGE_LANGUAGE_INVALID');
+	}
+
 	const validationResults = await Promise.all(
 		options.integrations.map((integration) => integration.validate(message)),
 	);

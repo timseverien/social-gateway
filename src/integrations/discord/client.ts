@@ -10,7 +10,7 @@ export function createDiscordClient(): HttpClient {
 	return httpClient;
 }
 
-// See: https://discord.com/developers/docs/resources/webhook#execute-webhook
+// See:https://discord.com/developers/docs/resources/webhook#execute-webhook
 export async function sendMessage(
 	client: HttpClient,
 	options: {

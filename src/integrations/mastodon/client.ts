@@ -17,22 +17,23 @@ export function createMastodonClient(
 // See: https://docs.joinmastodon.org/methods/statuses/#create
 export async function publishStatus(
 	client: HttpClient,
+	options: {
+		idempotencyKey?: string;
+	},
 	data: {
 		status: string;
-		idempotencyKey?: string;
+		language?: string;
 	},
 ) {
 	const headers = new Headers();
 
-	if (data.idempotencyKey) {
-		headers.set('Idempotency-Key', data.idempotencyKey);
+	if (options.idempotencyKey) {
+		headers.set('Idempotency-Key', options.idempotencyKey);
 	}
 
 	const response = await client.post('/api/v1/statuses', {
 		headers,
-		body: JSON.stringify({
-			status: data.status,
-		}),
+		body: JSON.stringify(data),
 	});
 
 	if (!response.ok) {
