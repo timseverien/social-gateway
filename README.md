@@ -26,7 +26,7 @@ Go full [POSSE](https://indieweb.org/POSSE) and syndicate the web.
 			<td>✅</td>
 			<td>🤷</td>
 			<td>🤷</td>
-			<td>❓ (up to 10)</td>
+			<td>❓ (≤10)</td>
 			<td>gif, jpg, png, and webp</td>
 		</tr>
 		<tr>
