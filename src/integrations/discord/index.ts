@@ -17,6 +17,12 @@ export function createDiscordIntegration(
 		publish: (message) =>
 			sendMessage(client, webhookOptions, {
 				content: message.content,
+				files:
+					message.media?.map((m) => ({
+						content: m.data,
+						description: m.description,
+						name: m.name,
+					})) ?? [],
 			}),
 	};
 }

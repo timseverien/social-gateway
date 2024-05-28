@@ -1,5 +1,6 @@
 import { checkbox, confirm, input } from '@inquirer/prompts';
 import { compact } from 'lodash';
+import * as path from 'node:path';
 import { publish } from '../src';
 import { Integration } from '../src/integrations/common';
 import { createDiscordIntegration } from '../src/integrations/discord';
@@ -52,6 +53,12 @@ const media = await input({
 	message: 'What image URL would you like to submit?',
 });
 
+const mediaDescription = media
+	? await input({
+			message: 'How would you describe the image?',
+		})
+	: '';
+
 const isConfirmed = await confirm({
 	message: `Are you sure you want to publish ${message} via ${integrationListFormatter.format(integrations)}`,
 	default: false,
@@ -66,8 +73,9 @@ if (isConfirmed) {
 			media: mediaFile
 				? [
 						{
+							name: path.basename(new URL(media).pathname),
 							data: mediaFile,
-							description: 'foobar',
+							description: mediaDescription,
 						},
 					]
 				: [],

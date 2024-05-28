@@ -1,5 +1,6 @@
 export type GatewayMessageImage = {
 	data: Buffer;
+	name: string;
 	description: string;
 };
 
