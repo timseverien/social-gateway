@@ -1,7 +1,6 @@
 import { checkbox, confirm, input } from '@inquirer/prompts';
 import { compact } from 'lodash';
 import { publish } from '../src';
-import { BaseUrl } from '../src/infrastructure/http.client';
 import { Integration } from '../src/integrations/common';
 import { createDiscordIntegration } from '../src/integrations/discord';
 import { createMastodonIntegration } from '../src/integrations/mastodon';
@@ -22,7 +21,7 @@ const integrationMap: Map<string, Integration> = new Map([
 		'Mastodon',
 		createMastodonIntegration({
 			accessToken: process.env['MASTODON_ACCESS_TOKEN']!,
-			instanceUrl: process.env['MASTODON_INSTANCE_URL'] as BaseUrl,
+			instanceUrl: process.env['MASTODON_INSTANCE_URL']!,
 		}),
 	],
 ]);
