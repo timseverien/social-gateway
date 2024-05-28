@@ -5,6 +5,11 @@ import { Integration } from '../src/integrations/common';
 import { createDiscordIntegration } from '../src/integrations/discord';
 import { createMastodonIntegration } from '../src/integrations/mastodon';
 
+async function getUrlContentAsBuffer(url: string) {
+	const response = await fetch(url);
+	return Buffer.from(await response.arrayBuffer());
+}
+
 const integrationListFormatter = new Intl.ListFormat('en', {
 	type: 'conjunction',
 });
@@ -43,15 +48,29 @@ const message = await input({
 	message: 'What would you like to say?',
 });
 
+const media = await input({
+	message: 'What image URL would you like to submit?',
+});
+
 const isConfirmed = await confirm({
 	message: `Are you sure you want to publish ${message} via ${integrationListFormatter.format(integrations)}`,
 	default: false,
 });
 
 if (isConfirmed) {
+	const mediaFile = media ? await getUrlContentAsBuffer(media) : null;
+
 	await publish(
 		{
 			content: message,
+			media: mediaFile
+				? [
+						{
+							data: mediaFile,
+							description: 'foobar',
+						},
+					]
+				: [],
 		},
 		{
 			integrations: compact(

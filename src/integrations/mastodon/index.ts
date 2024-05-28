@@ -1,5 +1,5 @@
 import { Integration } from '../common';
-import { createMastodonClient, publishStatus } from './client';
+import { createMastodonClient, publishStatus, uploadMedia } from './client';
 import { validateMessage } from './service';
 
 type MastodonIntegrationOptions = {
@@ -16,14 +16,29 @@ export function createMastodonIntegration(
 
 	return {
 		validate: validateMessage,
-		publish: (message) =>
-			publishStatus(
+		async publish(message) {
+			const media = await Promise.all(
+				message.media?.map((m) =>
+					uploadMedia(
+						client,
+						{},
+						{
+							file: m.data,
+							description: m.description,
+						},
+					),
+				) ?? [],
+			);
+
+			return publishStatus(
 				client,
 				{},
 				{
 					status: message.content,
 					language: message.language,
+					mediaIds: media.map((m) => m.id),
 				},
-			),
+			);
+		},
 	};
 }

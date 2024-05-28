@@ -1,6 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
 import {
+	BaseRequestOptions,
 	HttpClient,
+	OverrideRequestOptions,
 	RequestOptions,
 	mergeHeaders,
 	mergeRequestOptions,
@@ -106,4 +108,29 @@ describe(mergeRequestOptions.name, () => {
 			expect(result).toEqual(expectedResult);
 		},
 	);
+
+	test('given omitBaseHeader option, omits base header', () => {
+		const baseRequestOptions: BaseRequestOptions = {
+			headers: new Headers({
+				'x-foo': 'bar',
+				'x-bar': 'baz',
+			}),
+		};
+		const requestOptions: OverrideRequestOptions = {
+			omitBaseHeaders: ['x-foo'],
+			headers: new Headers({
+				'x-bar': 'baz',
+			}),
+		};
+
+		const result = mergeRequestOptions(baseRequestOptions, requestOptions);
+
+		expect(result).toEqual(
+			expect.objectContaining({
+				headers: new Headers({
+					'x-bar': 'baz',
+				}),
+			}),
+		);
+	});
 });
