@@ -32,7 +32,7 @@ Go full [POSSE](https://indieweb.org/POSSE) and syndicate the web.
 		<tr>
 			<th scope="row">Mastodon</th>
 			<td>✅</td>
-			<td>🤷</td>
+			<td>✅</td>
 			<td>🤷</td>
 			<td>🤷</td>
 			<td>🤷 (assumed jpg and png)</td>
