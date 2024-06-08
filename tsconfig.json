@@ -19,8 +19,8 @@
     "strict": true,
 
     // Modules
-    "module": "ES2022",
-    "moduleResolution": "Bundler",
+    "module": "Node16",
+    "moduleResolution": "Node16",
 
     // Emit
     "declaration": true

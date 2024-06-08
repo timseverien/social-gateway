@@ -1,4 +1,7 @@
-import { HttpClient, createHttpClient } from '../../infrastructure/http.client';
+import {
+	HttpClient,
+	createHttpClient,
+} from '../../infrastructure/http.client.js';
 
 type Payload = { content: string };
 type PayloadWithFiles = {

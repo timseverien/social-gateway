@@ -1,6 +1,6 @@
-import { Integration } from '../common';
-import { createMastodonClient, publishStatus, uploadMedia } from './client';
-import { validateMessage } from './service';
+import { Integration } from '../common.js';
+import { createMastodonClient, publishStatus, uploadMedia } from './client.js';
+import { validateMessage } from './service.js';
 
 type MastodonIntegrationOptions = {
 	instanceUrl: string;

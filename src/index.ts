@@ -1,6 +1,6 @@
 import iso639 from 'iso-639-1';
-import { GatewayMessage } from './core/message';
-import { Integration } from './integrations/common';
+import { GatewayMessage } from './core/message.js';
+import { Integration } from './integrations/common.js';
 
 export type PublishOptions = { integrations: Integration[] };
 

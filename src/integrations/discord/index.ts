@@ -1,6 +1,6 @@
-import { Integration } from '../common';
-import { createDiscordClient, sendMessage } from './client';
-import { validateMessage } from './service';
+import { Integration } from '../common.js';
+import { createDiscordClient, sendMessage } from './client.js';
+import { validateMessage } from './service.js';
 
 type DiscordIntegrationOptions = {
 	webhookId: string;
