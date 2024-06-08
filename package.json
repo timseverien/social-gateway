@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && tsc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json",
     "dev": "dotenvx run -- npm run test:watch",
     "lint": "eslint src/**/*.ts",
     "test": "dotenvx run -- vitest --run",

@@ -16,6 +16,7 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm test
+      - run: npm run-script build
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_ACCESS_TOKEN }}
