@@ -1,16 +1,21 @@
 {
   "name": "@tsev/social-gateway",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc --project tsconfig.build.json",
     "dev": "dotenvx run -- npm run test:watch",
     "lint": "eslint src/**/*.ts",
     "test": "dotenvx run -- vitest --run",
     "test:watch": "dotenvx run -- vitest",
     "test:live": "npm run build && dotenvx run -- vite-node scripts/test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
