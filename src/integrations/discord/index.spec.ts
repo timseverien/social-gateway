@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createDiscordIntegration } from '.';
+import { createDiscordIntegration } from './index';
 
 describe(createDiscordIntegration.name, () => {
 	test('does not throw', () => {

@@ -1,6 +1,6 @@
+import type { GatewayMessage } from '@/core/message';
+import type { IntegrationValidateResult } from '@/integrations/common';
 import * as path from 'node:path';
-import { GatewayMessage } from '../../core/message.js';
-import { IntegrationValidateResult } from '../common.js';
 
 const SUPPORTED_MEDIA_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 

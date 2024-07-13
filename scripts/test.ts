@@ -1,10 +1,12 @@
+import {
+	createDiscordIntegration,
+	createMastodonIntegration,
+	publish,
+} from '@/index';
+import { Integration } from '@/integrations/common';
 import { checkbox, confirm, input } from '@inquirer/prompts';
 import { compact } from 'lodash';
 import * as path from 'node:path';
-import { publish } from '../src';
-import { Integration } from '../src/integrations/common';
-import { createDiscordIntegration } from '../src/integrations/discord';
-import { createMastodonIntegration } from '../src/integrations/mastodon';
 
 async function getUrlContentAsBuffer(url: string) {
 	const response = await fetch(url);

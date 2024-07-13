@@ -1,6 +1,6 @@
+import type { GatewayMessage } from '@/core/message';
+import type { Integration } from '@/integrations/common';
 import iso639 from 'iso-639-1';
-import { GatewayMessage } from './core/message.js';
-import { Integration } from './integrations/common.js';
 
 export type PublishOptions = { integrations: Integration[] };
 
@@ -28,3 +28,6 @@ export async function publish(
 
 	await Promise.all(options.integrations.map((i) => i.publish(message)));
 }
+
+export * from '@/integrations/discord';
+export * from '@/integrations/mastodon';

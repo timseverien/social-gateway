@@ -1,4 +1,4 @@
-import { GatewayMessage } from '../core/message.js';
+import type { GatewayMessage } from '@/core/message';
 
 export type IntegrationValidateResult =
 	| 'CONTENT_TOO_LONG'

@@ -1,5 +1,5 @@
+import type { GatewayMessage } from '@/core/message';
 import { describe, expect, test } from 'vitest';
-import { GatewayMessage } from '../../core/message';
 import { validateMessage } from './service';
 
 describe(validateMessage.name, () => {

@@ -1,5 +1,5 @@
+import { createMockHttpClient } from '@/infrastructure/http.client.spec';
 import { describe, expect, test } from 'vitest';
-import { createMockHttpClient } from '../../infrastructure/http.client.spec';
 import { createDiscordClient, sendMessage } from './client';
 
 describe(createDiscordClient.name, () => {

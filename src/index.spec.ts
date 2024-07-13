@@ -1,7 +1,7 @@
+import type { GatewayMessage } from '@/core/message';
+import type { Integration } from '@/integrations/common';
 import { describe, expect, test, vi } from 'vitest';
-import { PublishOptions, publish } from '.';
-import { GatewayMessage } from './core/message';
-import { Integration } from './integrations/common';
+import { publish, type PublishOptions } from './index';
 
 describe(publish.name, () => {
 	test('calls integration validate', async () => {
@@ -9,7 +9,7 @@ describe(publish.name, () => {
 			content: 'foobar',
 		};
 		const integration: Integration = {
-			validate: vi.fn((_) => Promise.resolve('VALID')),
+			validate: vi.fn<Integration['validate']>((_) => Promise.resolve('VALID')),
 			publish: vi.fn(),
 		};
 		const publishOptions: PublishOptions = {
@@ -26,11 +26,11 @@ describe(publish.name, () => {
 			content: 'foobar',
 		};
 		const integration1: Integration = {
-			validate: vi.fn((_) => Promise.resolve('VALID')),
+			validate: vi.fn<Integration['validate']>((_) => Promise.resolve('VALID')),
 			publish: vi.fn(),
 		};
 		const integration2: Integration = {
-			validate: vi.fn((_) => Promise.resolve('VALID')),
+			validate: vi.fn<Integration['validate']>((_) => Promise.resolve('VALID')),
 			publish: vi.fn(),
 		};
 		const publishOptions: PublishOptions = {
@@ -48,7 +48,9 @@ describe(publish.name, () => {
 			content: 'foobar',
 		};
 		const integration: Integration = {
-			validate: vi.fn((_) => Promise.resolve('CONTENT_TOO_LONG')),
+			validate: vi.fn<Integration['validate']>((_) =>
+				Promise.resolve('CONTENT_TOO_LONG'),
+			),
 			publish: vi.fn(),
 		};
 		const publishOptions: PublishOptions = {
@@ -79,11 +81,13 @@ describe(publish.name, () => {
 			content: 'foobar',
 		};
 		const integration1: Integration = {
-			validate: vi.fn((_) => Promise.resolve('VALID')),
+			validate: vi.fn<Integration['validate']>((_) => Promise.resolve('VALID')),
 			publish: vi.fn(),
 		};
 		const integration2: Integration = {
-			validate: vi.fn((_) => Promise.resolve('CONTENT_TOO_LONG')),
+			validate: vi.fn<Integration['validate']>((_) =>
+				Promise.resolve('CONTENT_TOO_LONG'),
+			),
 			publish: vi.fn(),
 		};
 		const publishOptions: PublishOptions = {

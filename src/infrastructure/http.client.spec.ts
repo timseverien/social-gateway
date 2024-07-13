@@ -1,11 +1,11 @@
 import { describe, expect, test, vi } from 'vitest';
 import {
-	BaseRequestOptions,
-	HttpClient,
-	OverrideRequestOptions,
-	RequestOptions,
 	mergeHeaders,
 	mergeRequestOptions,
+	type BaseRequestOptions,
+	type HttpClient,
+	type OverrideRequestOptions,
+	type RequestOptions,
 } from './http.client';
 
 export function createMockHttpClient(

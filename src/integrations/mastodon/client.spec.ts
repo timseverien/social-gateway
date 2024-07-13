@@ -1,5 +1,5 @@
+import { createMockHttpClient } from '@/infrastructure/http.client.spec';
 import { describe, expect, test } from 'vitest';
-import { createMockHttpClient } from '../../infrastructure/http.client.spec';
 import { createMastodonClient, publishStatus } from './client';
 
 describe(createMastodonClient.name, () => {

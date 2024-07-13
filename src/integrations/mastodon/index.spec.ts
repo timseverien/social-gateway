@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createMastodonIntegration } from '.';
+import { createMastodonIntegration } from './index';
 
 describe(createMastodonIntegration.name, () => {
 	test('does not throw', () => {
