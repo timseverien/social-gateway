@@ -29,5 +29,8 @@ export async function publish(
 	await Promise.all(options.integrations.map((i) => i.publish(message)));
 }
 
+export type * from '@/core/message';
+export type * from '@/infrastructure/http.client';
+export type * from '@/integrations/common';
 export * from '@/integrations/discord';
 export * from '@/integrations/mastodon';

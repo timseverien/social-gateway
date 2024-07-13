@@ -1,18 +1,19 @@
+import { checkbox, confirm, input } from '@inquirer/prompts';
+import { compact } from 'lodash';
+import * as path from 'node:path';
 import {
 	createDiscordIntegration,
 	createMastodonIntegration,
 	publish,
-} from '@/index';
-import { Integration } from '@/integrations/common';
-import { checkbox, confirm, input } from '@inquirer/prompts';
-import { compact } from 'lodash';
-import * as path from 'node:path';
+	type Integration,
+} from '../dist';
 
 async function getUrlContentAsBuffer(url: string) {
 	const response = await fetch(url);
 	return Buffer.from(await response.arrayBuffer());
 }
 
+// @ts-expect-error
 const integrationListFormatter = new Intl.ListFormat('en', {
 	type: 'conjunction',
 });
